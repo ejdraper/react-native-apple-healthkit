@@ -214,4 +214,38 @@
     }];
 }
 
+- (void)fitness_getWorkouts:(NSDictionary *) input callback:(RCTResponseSenderBlock)callback
+{
+    NSPredicate *predicate = [HKQuery predicateForWorkoutsWithOperatorType:NSGreaterThanOrEqualToPredicateOperatorType duration:0];
+
+    NSMutableArray *sortDescriptors = [NSMutableArray array];
+    HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:[HKWorkoutType workoutType] predicate:predicate limit:0 sortDescriptors:sortDescriptors resultsHandler:^(HKSampleQuery * _Nonnull query, NSArray<__kindof HKSample *> * _Nullable results, NSError * _Nullable error) {
+
+        if (!results) {
+            if (callback) {
+                callback(@[RCTMakeError(@"ERROR getting Workouts", error, nil), [NSNull null]]);
+            }
+        }
+
+        NSMutableArray *data = [NSMutableArray arrayWithCapacity:[results count]];
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            for (HKWorkout *sample in results) {
+                NSDictionary *entry = @{
+                                        @"distance": @([sample.totalDistance doubleValueForUnit:[HKUnit meterUnit]]),
+                                        @"calories": @([sample.totalEnergyBurned doubleValueForUnit:[HKUnit calorieUnit]]),
+                                        @"startDate": [RCTAppleHealthKit buildISO8601StringFromDate:sample.startDate],
+                                        @"endDate": [RCTAppleHealthKit buildISO8601StringFromDate:sample.endDate]
+                                        };
+
+                [data addObject:entry];
+            }
+
+            callback(@[[NSNull null], data]);
+        });
+    }];
+
+    [self.healthStore executeQuery:query];
+}
+
 @end
