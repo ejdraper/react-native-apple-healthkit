@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <HealthKit/HealthKit.h>
-#import <React/RCTBridgeModule.h>
-#import <React/RCTUtils.h>
-#import <React/RCTLog.h>
+#import <RCTBridge.h>
+#import <RCTUtils.h>
+#import <RCTLog.h>
 
 @interface RCTAppleHealthKit : NSObject <RCTBridgeModule>
 
