@@ -47,6 +47,7 @@
         @"BloodGlucose" : [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodGlucose],
         // Sleep
         @"SleepAnalysis" : [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis],
+        @"Workouts" : [HKObjectType workoutType]
     };
     return readPerms;
 }
