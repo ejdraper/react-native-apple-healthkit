@@ -129,6 +129,11 @@ RCT_EXPORT_METHOD(getFlightsClimbed:(NSDictionary *)input callback:(RCTResponseS
     [self fitness_getFlightsClimbedOnDay:input callback:callback];
 }
 
+RCT_EXPORT_METHOD(getWorkouts:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self fitness_getWorkouts:input callback:callback];
+}
+
 RCT_EXPORT_METHOD(getHeartRateSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self vitals_getHeartRateSamples:input callback:callback];
