@@ -218,8 +218,8 @@
 {
     NSPredicate *predicate = [HKQuery predicateForWorkoutsWithOperatorType:NSGreaterThanOrEqualToPredicateOperatorType duration:0];
 
-    NSMutableArray *sortDescriptors = [NSMutableArray array];
-    HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:[HKWorkoutType workoutType] predicate:predicate limit:0 sortDescriptors:sortDescriptors resultsHandler:^(HKSampleQuery * _Nonnull query, NSArray<__kindof HKSample *> * _Nullable results, NSError * _Nullable error) {
+    NSSortDescriptor *timeSortDescriptor = [[NSSortDescriptor alloc] initWithKey:HKSampleSortIdentifierEndDate ascending:false];
+    HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:[HKWorkoutType workoutType] predicate:predicate limit:0 sortDescriptors:@[timeSortDescriptor] resultsHandler:^(HKSampleQuery * _Nonnull query, NSArray<__kindof HKSample *> * _Nullable results, NSError * _Nullable error) {
 
         if (!results) {
             if (callback) {
