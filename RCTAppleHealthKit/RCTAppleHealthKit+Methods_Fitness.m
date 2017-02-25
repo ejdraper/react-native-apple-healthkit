@@ -231,7 +231,70 @@
 
         dispatch_async(dispatch_get_main_queue(), ^{
             for (HKWorkout *sample in results) {
+                NSString *workoutActivityType = NULL;
+                switch(sample.workoutActivityType) {
+                    case HKWorkoutActivityTypeBasketball:
+                        workoutActivityType = @"Basketball";
+                        break;
+                    case HKWorkoutActivityTypeCrossTraining:
+                        workoutActivityType = @"Circuit Training";
+                        break;
+                    case HKWorkoutActivityTypeCycling:
+                        workoutActivityType = @"Cycling";
+                        break;
+                    case HKWorkoutActivityTypeHiking:
+                        workoutActivityType = @"Hiking";
+                        break;
+                    case HKWorkoutActivityTypeRunning:
+                        workoutActivityType = @"Running";
+                        break;
+                    case HKWorkoutActivityTypeSwimming:
+                        workoutActivityType = @"Swimming";
+                        break;
+                    case HKWorkoutActivityTypeWalking:
+                        workoutActivityType = @"Walking";
+                        break;
+                    case HKWorkoutActivityTypeFunctionalStrengthTraining:
+                        workoutActivityType = @"Weight Lifting";
+                        break;
+                    case HKWorkoutActivityTypeDance:
+                        workoutActivityType = @"Dancing";
+                        break;
+                    case HKWorkoutActivityTypeAmericanFootball:
+                        workoutActivityType = @"Football";
+                        break;
+                    case HKWorkoutActivityTypeGolf:
+                        workoutActivityType = @"Golf";
+                        break;
+                    case HKWorkoutActivityTypeMartialArts:
+                    case HKWorkoutActivityTypeKickboxing:
+                        workoutActivityType = @"Martial Arts";
+                        break;
+                    case HKWorkoutActivityTypeRowing:
+                        workoutActivityType = @"Rowing Machine";
+                        break;
+                    case HKWorkoutActivityTypeSoccer:
+                        workoutActivityType = @"Soccer";
+                        break;
+                    case HKWorkoutActivityTypeStairClimbing:
+                    case HKWorkoutActivityTypeStairs:
+                        workoutActivityType = @"Stair Machine";
+                        break;
+                    case HKWorkoutActivityTypeTableTennis:
+                        workoutActivityType = @"Table Tennis";
+                        break;
+                    case HKWorkoutActivityTypeTennis:
+                        workoutActivityType = @"Tennis";
+                        break;
+                    case HKWorkoutActivityTypeYoga:
+                        workoutActivityType = @"Yoga";
+                        break;
+                    default:
+                        workoutActivityType = @"Other";
+                        break;
+                };
                 NSDictionary *entry = @{
+                                        @"activityType": workoutActivityType,
                                         @"distance": @([sample.totalDistance doubleValueForUnit:[HKUnit meterUnit]]),
                                         @"calories": @([sample.totalEnergyBurned doubleValueForUnit:[HKUnit calorieUnit]]),
                                         @"startDate": [RCTAppleHealthKit buildISO8601StringFromDate:sample.startDate],
