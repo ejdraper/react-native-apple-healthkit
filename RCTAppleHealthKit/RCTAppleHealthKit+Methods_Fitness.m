@@ -294,6 +294,7 @@
                         break;
                 };
                 NSDictionary *entry = @{
+                                        @"source": sample.sourceRevision.source.name,
                                         @"activityType": workoutActivityType,
                                         @"distance": @([sample.totalDistance doubleValueForUnit:[HKUnit meterUnit]]),
                                         @"calories": @([sample.totalEnergyBurned doubleValueForUnit:[HKUnit calorieUnit]]),
